@@ -99,3 +99,35 @@ class NEURAL_NETWORK:
                 self.neurons[neuronName].Print()
 
         print("")
+    def Update(self):
+        for neuronName in sorted(self.neurons):
+            if self.neurons[neuronName].Is_Sensor_Neuron():
+                self.neurons[neuronName].Update_Sensor_Neuron()
+            else:
+                self.neurons[neuronName].Update_Hidden_Or_Motor_Neuron()
+
+    def Get_Neuron_Names(self):
+        names = []
+        for neuronName in sorted(self.neurons):
+            names.append(neuronName)
+        return names
+
+    def Is_Motor_Neuron(self, neuronName):
+        for name, neuron in self.neurons.items():
+            if name == neuronName:
+                return neuron.Is_Motor_Neuron()
+        return False
+    
+    def Get_Motor_Neurons_Joint(self, neuronName):
+        for name, neuron in self.neurons.items():
+            if name == neuronName:
+                return neuron.Get_Joint_Name()
+        return "No neuron name"
+
+    def Get_Value_Of(self, neuronName):
+        for name, neuron in self.neurons.items():
+            if name == neuronName:
+                return neuron.Get_Value()
+        return "No neuron found"
+
+    
