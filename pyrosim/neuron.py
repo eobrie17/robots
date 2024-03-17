@@ -126,30 +126,34 @@ class NEURON:
         self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(self.Get_Link_Name()))
 
     def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses):
-        for key, value in neurons.items():
-            print(key)
-            print(value)
-            print(value.Get_Value())
+        ##PRINT THIS TO SHOW ALL NEURONS
+        # for key, value in neurons.items():
+        #     print(key)
+        #     print(value)
+        #     print(value.Get_Value())
+        #     print(value.Get_Name())
+        #     print('************************')
+        ##
         self.Set_Value(0.0)
         print("current neuron: ", self.Get_Name())
         print('value of neuron: ', self.Get_Value())
         for key, value in synapses.items():
             presynaptic_neuron = key[0]
             postsynaptic_neuron = key[1]
-            print(presynaptic_neuron)
+            # print(presynaptic_neuron)
             if postsynaptic_neuron == self.Get_Name():
                 #synapse arrives at this neuron!
+                ##print("SYNAPSE ARRIVES AT NEURON")
                 # print(presynaptic_neuron)
                 # print(synapses[key].Get_Weight())
                 # TODO -- why is this neuron's value a -1???????
                 # print(neurons[presynaptic_neuron].Get_Value())
+                ##print("*******************")
                 self.Allow_Presynaptic_Neuron_To_Influence_Me(synapses[key].Get_Weight(), neurons[presynaptic_neuron].Get_Value())
-        # print('value of neuron: ', self.Get_Value())
-        exit()
+        self.Threshold()
+        print('value of neuron: ', self.Get_Value())
 
     def Allow_Presynaptic_Neuron_To_Influence_Me(self, synapse_weight, presynaptic_neuron_value):
-        print(synapse_weight)
-        print(presynaptic_neuron_value)
         #multiply presynaptic neuron's value by its outgoing synapse's weight
         result = synapse_weight * presynaptic_neuron_value
         self.Add_To_Value(result)
