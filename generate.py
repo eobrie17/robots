@@ -41,7 +41,6 @@ def generate_brain():
         for j in range(3, 5):
             pyrosim.Send_Synapse(sourceNeuronName = i , targetNeuronName = j , weight = random.uniform(-1, 1))
 
-
     pyrosim.End()
 
 

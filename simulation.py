@@ -7,8 +7,12 @@ import constants as c
 import time
 
 class SIMULATION:
-    def __init__(self):
-        self.physicsClient = p.connect(p.GUI)
+    def __init__(self, directOrGUI):
+
+        if directOrGUI == 'DIRECT':
+            self.physicsClient = p.connect(p.DIRECT)
+        else:
+            self.physicsClient = p.connect(p.GUI)
 
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
@@ -25,7 +29,10 @@ class SIMULATION:
             self.robot.sense(i)
             self.robot.think(i)
             self.robot.act(i)
-            time.sleep(1/1100)
+            time.sleep(1/1800)
+
+    def get_fitness(self):
+        self.robot.get_fitness()
         
     def __del__(self):
         p.disconnect()

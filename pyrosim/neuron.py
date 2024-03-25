@@ -135,23 +135,14 @@ class NEURON:
         #     print('************************')
         ##
         self.Set_Value(0.0)
-        print("current neuron: ", self.Get_Name())
-        print('value of neuron: ', self.Get_Value())
         for key, value in synapses.items():
             presynaptic_neuron = key[0]
             postsynaptic_neuron = key[1]
             # print(presynaptic_neuron)
             if postsynaptic_neuron == self.Get_Name():
                 #synapse arrives at this neuron!
-                ##print("SYNAPSE ARRIVES AT NEURON")
-                # print(presynaptic_neuron)
-                # print(synapses[key].Get_Weight())
-                # TODO -- why is this neuron's value a -1???????
-                # print(neurons[presynaptic_neuron].Get_Value())
-                ##print("*******************")
                 self.Allow_Presynaptic_Neuron_To_Influence_Me(synapses[key].Get_Weight(), neurons[presynaptic_neuron].Get_Value())
         self.Threshold()
-        print('value of neuron: ', self.Get_Value())
 
     def Allow_Presynaptic_Neuron_To_Influence_Me(self, synapse_weight, presynaptic_neuron_value):
         #multiply presynaptic neuron's value by its outgoing synapse's weight
