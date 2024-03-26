@@ -6,4 +6,6 @@ phaseOffset = np.pi/4
 
 iterations = 1000
 
-numberOfGenerations = 50
+numberOfGenerations = 10
+
+populationSize = 10

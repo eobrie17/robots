@@ -2,21 +2,46 @@ import numpy as np
 import pyrosim.pyrosim as pyrosim
 import os
 import random
+import time
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, id):
         self.weights = np.random.rand(3, 2) * 2 - 1
+        self.myID = id
 
-    def evaluate(self, directOrGUI):
+    # def evaluate(self, directOrGUI):
+    #     self.create_world()
+    #     self.create_body()
+    #     self.create_brain()
+
+    #     #search.py will continue to run without waiting for simulate.py to finish
+    #     os.system(f"python3 simulate.py {directOrGUI} {self.myID} &")
+
+    #     while not os.path.exists(fitnessFileName):
+    #         time.sleep(0.01)
+
+    #     fitnessFile = f'fitness{self.myID}.txt'
+    #     with open(fitnessFile, 'r') as file:
+    #         self.fitness = float(file.read())
+
+    def start_simulation(self, directOrGUI):
         self.create_world()
         self.create_body()
         self.create_brain()
 
-        os.system(f"python3 simulate.py {directOrGUI}")
+        #search.py will continue to run without waiting for simulate.py to finish
+        os.system(f"python3 simulate.py {directOrGUI} {self.myID} &")
 
-        fitnessFile = 'fitness.txt'
+    def wait_for_simulation_to_end(self):
+        fitnessFile = f'fitness{self.myID}.txt'
+
+        while not os.path.exists(fitnessFile):
+            time.sleep(0.8)
+
         with open(fitnessFile, 'r') as file:
             self.fitness = float(file.read())
+
+        os.system(f"rm fitness{self.myID}.txt")
 
     def create_world(self):
         pyrosim.Start_SDF("world.sdf")
@@ -40,7 +65,7 @@ class SOLUTION:
         pyrosim.End()
 
     def create_brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
         #sensor neurons receive values from sensors
         #name our neurons with numbers, because we are going to update the values\
         #of each neuron in our neural network, every simulation time step, in a specific order:\
@@ -63,4 +88,8 @@ class SOLUTION:
         randomCol = random.randint(0,1)
         #random element
         self.weights[randomRow, randomCol] = random.random()*2-1
+    
+    def set_ID(self, nextAvailableID):
+        self.myID = nextAvailableID
+        
         
