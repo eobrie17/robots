@@ -30,7 +30,7 @@ class SOLUTION:
         self.create_brain()
 
         #search.py will continue to run without waiting for simulate.py to finish
-        os.system(f"python3 simulate.py {directOrGUI} {self.myID} &")
+        os.system(f"python3 simulate.py {directOrGUI} {self.myID} 2&>1 &")
 
     def wait_for_simulation_to_end(self):
         fitnessFile = f'fitness{self.myID}.txt'
