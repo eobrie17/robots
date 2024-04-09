@@ -6,11 +6,11 @@ phaseOffset = np.pi/4
 
 iterations = 1000
 
-numberOfGenerations = 20
+numberOfGenerations = 1
 
-populationSize = 15
+populationSize = 1
 
-numSensorNeurons = 9
-numMotorNeurons = 8
+numSensorNeurons = 17
+numMotorNeurons = 16
 
 motorJointRange = .2
