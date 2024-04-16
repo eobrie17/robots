@@ -26,16 +26,18 @@ class SIMULATION:
 
 
     def run(self):
+        #i is the time
         for i in range(0, c.iterations):
+            self.time = i
             p.stepSimulation()
-            self.robot.sense(i)
-            self.robot.think(i)
-            self.robot.act(i)
+            self.robot.sense(self.time)
+            self.robot.think(self.time)
+            self.robot.act(self.time)
             if self.directOrGUI == "GUI":
                 time.sleep(1/1800)
 
     def get_fitness(self):
-        self.robot.get_fitness()
+        self.robot.get_fitness(self.time)
         
     def __del__(self):
         p.disconnect()

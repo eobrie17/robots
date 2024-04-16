@@ -47,12 +47,24 @@ class ROBOT:
         self.nn.Update()
         #self.nn.Print()
     
-    def get_fitness(self):
+    def get_fitness(self, time):
         stateOfLinkZero = p.getLinkState(self.robotId,0)
         positionOfLinkZero = stateOfLinkZero[0]
-        xCoordinateOfLinkZero = positionOfLinkZero[0]
-        f = open(f"tmp{self.solutionID}.txt", "w")
+        #xCoordinateOfLinkZero = positionOfLinkZero[0]
+        x, y, z = positionOfLinkZero
+
+        #velocity = y
+        distance = (x**2 + y**2 + z**2)**0.5  # Distance from the origin
+        speed = distance / time
+
+        #write to speed file 
+        f1 = open("speeds.txt", "a")
+        f1.write(str(speed)+ "\n")
+        f1.close()
+        
+        #write to fitness file
+        f2 = open(f"tmp{self.solutionID}.txt", "w")
         os.system(f"mv tmp{self.solutionID}.txt fitness{self.solutionID}.txt")
-        f.write(str(xCoordinateOfLinkZero))
-        f.close()
+        f2.write(str(distance))
+        f2.close()
         
