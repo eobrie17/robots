@@ -54,17 +54,30 @@ class ROBOT:
         x, y, z = positionOfLinkZero
 
         #velocity = y
-        distance = (x**2 + y**2 + z**2)**0.5  # Distance from the origin
+        distance = (x**2 + y**2)**0.5  # Distance from the horizontally
         speed = distance / time
 
         #write to speed file 
         f1 = open("speeds.txt", "a")
         f1.write(str(speed)+ "\n")
         f1.close()
+
+        #fitness - not dividing by time because that is the same for every robot
+        penalty = 0
+
+        # vertical_threshold = 1 # Allow small vertical movements, e.g., due to terrain
+        # if abs(z) > vertical_threshold:
+        #     penalty += abs(z) * .5
+
+        # minimal_movement = 0.05
+        # if distance < minimal_movement:
+        #     penalty += 5 # penality for staying still 
+            
+        fitness = max(0, distance - penalty) #make sure fitness isn't negative
         
         #write to fitness file
         f2 = open(f"tmp{self.solutionID}.txt", "w")
         os.system(f"mv tmp{self.solutionID}.txt fitness{self.solutionID}.txt")
-        f2.write(str(distance))
+        f2.write(str(fitness))
         f2.close()
         

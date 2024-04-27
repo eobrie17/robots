@@ -6,18 +6,18 @@ phaseOffset = np.pi/4
 
 iterations = 1000
 
-numberOfGenerations = 10
+numberOfGenerations = 100
 
 populationSize = 10
 
 #CHANGE THIS
 
-#OCTOPOD
-numSensorNeurons = 17
-numMotorNeurons = 16
+# #OCTOPOD
+# numSensorNeurons = 17
+# numMotorNeurons = 16
 
-# #QUADRUPED
-# numSensorNeurons = 9
-# numMotorNeurons = 8
+#QUADRUPED
+numSensorNeurons = 9
+numMotorNeurons = 8
 
-motorJointRange = .2
+motorJointRange = .4

@@ -13,8 +13,8 @@ class SOLUTION:
     def start_simulation(self, directOrGUI):
         self.create_world()
         #CHANGE THESE FOR OCTOPOD VS QUADRUPED
-        self.create_body_octopod()
-        self.create_brain_octopod()
+        self.create_body_quadruped()
+        self.create_brain_quadruped()
 
         #search.py will continue to run without waiting for simulate.py to finish
         os.system(f"python3 simulate.py {directOrGUI} {self.myID} 2&>1 &")

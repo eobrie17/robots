@@ -53,7 +53,7 @@ class PARALLEL_HILLCLIMBER:
 
     def select(self):
         for key in self.parents.keys():
-            if self.parents[key].fitness > self.children[key].fitness:
+            if self.parents[key].fitness < self.children[key].fitness:
                 self.parents[key] = self.children[key]
 
     def print_fitness(self):
@@ -91,4 +91,4 @@ class PARALLEL_HILLCLIMBER:
                 print(f"New best found: {name} with fitness {best_fitness}") 
         print("BEST------- ", best_solution.fitness)
         best_solution.start_simulation("GUI")
-        #self.graph_speeds()
+        self.graph_speeds()
