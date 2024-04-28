@@ -12,12 +12,12 @@ populationSize = 10
 
 #CHANGE THIS
 
-# #OCTOPOD
-# numSensorNeurons = 17
-# numMotorNeurons = 16
+#OCTOPOD
+numSensorNeurons = 17
+numMotorNeurons = 16
 
-#QUADRUPED
-numSensorNeurons = 9
-numMotorNeurons = 8
+# #QUADRUPED
+# numSensorNeurons = 9
+# numMotorNeurons = 8
 
 motorJointRange = .4
