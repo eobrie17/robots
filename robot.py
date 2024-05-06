@@ -58,20 +58,12 @@ class ROBOT:
         speed = distance / time
 
         #write to speed file 
-        f1 = open("speeds.txt", "a")
-        f1.write(str(speed)+ "\n")
+        f1 = open("evolutions/octocurve_1.txt", "a") #CHANGE THIS FILE NAME TO SAVE FITNESS CURVE
+        f1.write(str(distance)+ "\n")
         f1.close()
 
         #fitness - not dividing by time because that is the same for every robot
         penalty = 0
-
-        # vertical_threshold = 1 # Allow small vertical movements, e.g., due to terrain
-        # if abs(z) > vertical_threshold:
-        #     penalty += abs(z) * .5
-
-        # minimal_movement = 0.05
-        # if distance < minimal_movement:
-        #     penalty += 5 # penality for staying still 
             
         fitness = max(0, distance - penalty) #make sure fitness isn't negative
         

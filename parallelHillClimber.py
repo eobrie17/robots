@@ -78,6 +78,36 @@ class PARALLEL_HILLCLIMBER:
         for i in range(10, num_robots, 10):
             plt.axvline(x=i, color='r', linestyle='--', linewidth=1)
         plt.show()
+    
+    def fitness_curve(self):
+        with open('speeds.txt', 'r') as file:
+            #list of speeds stripped
+            speed_data = [line.strip() for line in file.readlines()]
+        #make sure they are floats
+        all_parents = [float(speed) for speed in speed_data]
+
+        current_avg = 0
+        generation_avg  = []
+        parent_counter = 0
+        for parent_fitness in all_parents:
+            current_avg += parent_fitness
+            parent_counter += 1
+            if parent_counter % c.populationSize == 0:
+                generation_avg.append(current_avg/c.populationSize)
+                current_avg = 0
+        print(generation_avg)
+
+        plt.figure(figsize=(10, 5))
+        plt.plot(generation_avg, marker='o', linestyle='-', color='b')
+        plt.title('Average Fitness per Generation')
+        plt.xlabel('Generation')
+        plt.ylabel('Average Fitness')
+        plt.grid(True)
+        plt.show()
+
+
+
+
 
 
     #TODO pick so we display parent with the lowest fitness score!!
@@ -91,4 +121,3 @@ class PARALLEL_HILLCLIMBER:
                 print(f"New best found: {name} with fitness {best_fitness}") 
         print("BEST------- ", best_solution.fitness)
         best_solution.start_simulation("GUI")
-        self.graph_speeds()
